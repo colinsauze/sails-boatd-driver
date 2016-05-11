@@ -27,7 +27,7 @@ wind = sailsd.Wind(auto_update=True)
 
 @driver.heading
 def sailsd_heading():
-    return math.degrees(sailsd.heading) % 360
+    return math.degrees(boat.heading) % 360
 
 @driver.wind_direction
 def sailsd_wind():
@@ -35,7 +35,7 @@ def sailsd_wind():
 
 @driver.position
 def sailsd_lat_long():
-    return (sailsd.latitude, sailsd.longitude)
+    return (boat.latitude, boat.longitude)
 
 @driver.rudder
 def sailsd_set_rudder(angle):
