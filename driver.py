@@ -20,23 +20,29 @@ import math
 import boatd
 import sailsd
 
-driver = boatd.Driver()
 
-boat = sailsd.Boat(auto_update=True)
-wind = sailsd.Wind(auto_update=True)
+class SailsdDriver(boatd.DriverABC):
+    def __init__(self):
+        self.boat = sailsd.Boat(auto_update=True)
+        self.wind = sailsd.Wind(auto_update=True)
 
-@driver.heading
-def sailsd_heading():
-    return math.degrees(boat.heading) % 360
+    def heading(self):
+        return math.degrees(self.boat.heading) % 360
 
-@driver.wind_direction
-def sailsd_wind():
-    return math.degrees(wind.angle)
+    def wind_direction(self):
+        return math.degrees(self.wind.angle)
 
-@driver.position
-def sailsd_lat_long():
-    return (boat.latitude, boat.longitude)
+    def wind_speed(self):
+        return None
 
-@driver.rudder
-def sailsd_set_rudder(angle):
-    boat.rudder_angle = math.radians(angle)
+    def position(self):
+        return (self.boat.latitude, self.boat.longitude)
+
+    def rudder(self, angle):
+        self.boat.rudder_angle = math.radians(angle)
+
+    def sail(self, angle):
+        pass
+
+
+driver = SailsdDriver()
