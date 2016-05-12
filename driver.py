@@ -21,7 +21,7 @@ import boatd
 import sailsd
 
 
-class SailsdDriver(boatd.DriverABC):
+class SailsdDriver(boatd.BaseBoatdDriver):
     def __init__(self):
         self.boat = sailsd.Boat(auto_update=True)
         self.wind = sailsd.Wind(auto_update=True)
