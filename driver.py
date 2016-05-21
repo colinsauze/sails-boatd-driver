@@ -39,6 +39,11 @@ class SailsdDriver(boatd.BaseBoatdDriver):
         return (self.boat.latitude, self.boat.longitude)
 
     def rudder(self, angle):
+        if angle > 45:
+            angle = 45
+        elif angle < -45:
+            angle = -45
+
         self.boat.rudder_angle = math.radians(angle)
 
     def sail(self, angle):
