@@ -23,6 +23,9 @@ import sailsd
 
 class SailsdDriver(boatd.BaseBoatdDriver):
     def __init__(self):
+        self.reconnect()
+
+    def reconnect(self):
         self.boat = sailsd.Boat(auto_update=True)
         self.wind = sailsd.Wind(auto_update=True)
 
