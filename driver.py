@@ -32,7 +32,7 @@ class SailsdDriver(boatd.BaseBoatdDriver):
     def heading(self):
         return math.degrees(self.boat.heading) % 360
 
-    def wind_direction(self):
+    def absolute_wind_direction(self):
         return math.degrees(self.wind.angle)
 
     def wind_speed(self):
