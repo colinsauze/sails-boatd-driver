@@ -33,7 +33,21 @@ class SailsdDriver(boatd.BaseBoatdDriver):
         return math.degrees(self.boat.heading) % 360
 
     def absolute_wind_direction(self):
-        return math.degrees(self.wind.angle)
+        #despite the name of this function we need to return relative/apparent wind direction
+        #internally sails stores absolute wind direction 
+        #convert by subtracting heading from this
+
+        #sails also has the wind coordinates 180 degrees out,fix this first
+        abs_wind = ( math.degrees(self.wind.angle) + 180 ) % 360
+        return abs_wind
+
+    def apparent_wind_direction(self):
+        #convert to relative wind
+        abs_wind = ( math.degrees(self.wind.angle) + 180 ) % 360
+
+        heading = math.degrees(self.boat.heading) % 360
+        rel_wind = (abs_wind - heading) % 360
+        return rel_wind
 
     def wind_speed(self):
         return None
@@ -50,7 +64,6 @@ class SailsdDriver(boatd.BaseBoatdDriver):
         self.boat.rudder_angle = math.radians(angle)
 
     def sail(self, angle):
-        pass
-
+        self.boat.sheet_length = abs(angle)/50
 
 driver = SailsdDriver()
