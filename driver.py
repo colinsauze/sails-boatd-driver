@@ -38,21 +38,13 @@ class SailsdDriver(boatd.BaseBoatdDriver):
         #convert by subtracting heading from this
 
         #sails also has the wind coordinates 180 degrees out,fix this first
-<<<<<<< HEAD
         abs_wind = math.degrees(self.wind.angle + math.pi) % 360
         #print("self.wind.angle=",self.wind.angle)
         #print("abs_wind=",abs_wind)
-=======
-        #abs_wind = ( (self.wind.angle) + 180 ) % 360
-        abs_wind = (self.wind.angle ) % 360
-        print("self.wind.angle=",self.wind.angle)
-        print("abs_wind=",abs_wind)
->>>>>>> ece438f8980333cf815d7759a3b624518e99b437
         return abs_wind
 
     def apparent_wind_direction(self):
         #convert to relative wind
-<<<<<<< HEAD
 
         abs_wind = math.degrees( self.wind.angle + math.pi) % 360
 
@@ -60,15 +52,6 @@ class SailsdDriver(boatd.BaseBoatdDriver):
         #print("heading=",heading)
         rel_wind = (abs_wind - heading) % 360
         #print("rel_wind=",rel_wind)
-=======
-        abs_wind = ( self.wind.angle  ) % 360
-        #abs_wind = self.wind.angle
-
-        heading = math.degrees(self.boat.heading) % 360
-        print("heading=",heading)
-        rel_wind = (abs_wind - heading) % 360
-        print("rel_wind=",rel_wind)
->>>>>>> ece438f8980333cf815d7759a3b624518e99b437
         return rel_wind
 
     def wind_speed(self):
