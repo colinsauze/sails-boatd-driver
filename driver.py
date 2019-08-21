@@ -20,10 +20,13 @@ import math
 import boatd
 import sailsd
 
+import random
+import numpy
 
 class SailsdDriver(boatd.BaseBoatdDriver):
     def __init__(self):
         self.reconnect()
+        self.water_depth = 5
 
     def reconnect(self):
         self.boat = sailsd.Boat(auto_update=True)
@@ -31,6 +34,27 @@ class SailsdDriver(boatd.BaseBoatdDriver):
 
     def heading(self):
         return math.degrees(self.boat.heading) % 360
+
+
+    def roll(self):
+        '''send random numbers for the roll angle
+        use a normal distribution with a mean of zero and standard deviation of 30
+        '''
+        return numpy.random.normal(0,30)
+
+    def pitch(self):
+        '''send random numbers for the pitch angle
+        use a normal distribution with a mean of zero and standard deviation of 30
+        '''
+        return numpy.random.normal(0,30)
+
+    def depth(self):
+        ''' send a random water depth '''
+        self.water_depth = self.water_depth + random.randint(-10,10)
+        if self.water_depth < 1:
+            self.water_depth = 1
+        return self.water_depth
+
 
     def absolute_wind_direction(self):
         #despite the name of this function we need to return relative/apparent wind direction
