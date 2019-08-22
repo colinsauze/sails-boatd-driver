@@ -40,17 +40,19 @@ class SailsdDriver(boatd.BaseBoatdDriver):
         '''send random numbers for the roll angle
         use a normal distribution with a mean of zero and standard deviation of 30
         '''
-        return numpy.random.normal(0,30)
+        new_roll = numpy.random.normal(0,30)
+        return new_roll
 
     def pitch(self):
         '''send random numbers for the pitch angle
         use a normal distribution with a mean of zero and standard deviation of 30
         '''
-        return numpy.random.normal(0,30)
+        new_pitch = numpy.random.normal(0,10)
+        return new_pitch
 
     def depth(self):
         ''' send a random water depth '''
-        self.water_depth = self.water_depth + random.randint(-10,10)
+        self.water_depth = self.water_depth + numpy.random.normal(0,1)
         if self.water_depth < 1:
             self.water_depth = 1
         return self.water_depth
